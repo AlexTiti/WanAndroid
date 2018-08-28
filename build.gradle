@@ -1,0 +1,51 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext.kotlin_version = '1.2.60'
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext{
+
+    retrofitVersion = '2.2.0'
+    okhttploggingVersion = '3.4.1'
+    okhttpVersion = '3.4.1'
+    rxjavaVersion = '2.0.1'
+    rxandroidVersion = '2.0.1'
+    rxbindingVersion = '2.0.0'
+
+
+    constraintVersion = '1.1.2'
+    butterknifeVwesion = '8.8.1'
+    rxandroidVersion = '2.0.1'
+    rxjavaVersion = '2.1.7'
+    rxbindingVersion = '2.1.1'
+    glideVersion = '4.6.1'
+    glide_transformations = '3.0.1'
+    gsonVersion = '2.8.2'
+    okhttpVersion = '3.9.1'
+    retrofit2Version = '2.3.0'
+    rxjava2_adapterVersion = '1.0.0'
+    BaseRecyclerViewAdapterHelperVersion = '2.9.34'
+}
