@@ -9,14 +9,16 @@ import com.example.administrator.wanandroid.ui.fragment.RegisterFragment
 import com.example.library.base.BaseCompatActivity
 
 class LoginActivity : BaseCompatActivity() {
+
     override fun onErrorViewClick(v: View?) {
 
     }
 
     override fun initView(savedInstanceState: Bundle?) {
+
         if (savedInstanceState != null) savedInstanceState.let {
-            loginFragment = fragmentManager.getFragment(it!!, LoginFragment::class.java.simpleName) as LoginFragment
-            registerFragment = fragmentManager.getFragment(it!!, registerFragment!!::class.java.simpleName) as RegisterFragment
+            loginFragment = fragmentManager.getFragment(it, LoginFragment::class.java.simpleName) as LoginFragment
+            registerFragment = fragmentManager.getFragment(it, registerFragment!!::class.java.simpleName) as RegisterFragment
         } else {
             loginFragment = LoginFragment.newInstance()
             registerFragment = RegisterFragment.newInstance()

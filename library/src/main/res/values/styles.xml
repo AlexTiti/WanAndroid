@@ -9,4 +9,14 @@
         <item name="android:windowActionBar">false</item>
         <item name="windowActionModeOverlay">true</item>
     </style>
+
+    <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="ToolbarPup" parent="ThemeOverlay.AppCompat" />
+
+    <style name="TabLayoutText" parent="Base.TextAppearance.AppCompat.Button">
+        <item name="android:textSize">@dimen/design_tab_text_size</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="textAllCaps">true</item>
+    </style>
 </resources>

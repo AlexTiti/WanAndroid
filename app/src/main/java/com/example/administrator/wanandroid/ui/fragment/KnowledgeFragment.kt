@@ -14,13 +14,10 @@ import kotlinx.android.synthetic.main.fragment_page.*
  */
 class KnowledgeFragment : BaseCompatFragment() {
 
-    override val layoutId = R.layout.fragment_page
+    override val layoutId = R.layout.fragment_knowledge
 
     override fun initUI(view: View, savedInstanceState: Bundle?) {
-        button.text = "Knowledge"
-        button.setOnClickListener {
-            ( activity as MainActivity).showFragmentIndex(1)
-        }
+
     }
 
     override fun lazyLoadData() {

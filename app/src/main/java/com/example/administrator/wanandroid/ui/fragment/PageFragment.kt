@@ -3,7 +3,7 @@ package com.example.administrator.wanandroid.ui.fragment
 import android.os.Bundle
 import android.view.View
 import com.example.administrator.wanandroid.R
-import com.example.administrator.wanandroid.ui.MainActivity
+import com.example.administrator.wanandroid.adapter.ViewPageAdapter
 import com.example.library.base.fragment.BaseCompatFragment
 import kotlinx.android.synthetic.main.fragment_page.*
 
@@ -16,13 +16,37 @@ class PageFragment : BaseCompatFragment() {
 
     override val layoutId = R.layout.fragment_page
 
-    override fun initUI(view: View, savedInstanceState: Bundle?) {
-        button.setOnClickListener {
-            ( activity as MainActivity ).showFragmentIndex(0)
-        }
+    private val supportFragmentManager by lazy {
+        activity?.supportFragmentManager
     }
 
+    private val fragmentList: MutableList<BaseCompatFragment> by lazy {
+        mutableListOf<BaseCompatFragment>()
+    }
+
+    val adapter by lazy {
+        ViewPageAdapter(supportFragmentManager!!)
+
+
+    }
+
+
+    override fun initUI(view: View, savedInstanceState: Bundle?) {
+        fragmentList.let {
+            it.add(ArticleFragment.newInstance())
+            it.add(ArticleFragment.newInstance())
+            it.add(ArticleFragment.newInstance())
+        }
+        adapter.setFragments(fragmentList)
+
+        vpMain.adapter = adapter
+        vpMain.offscreenPageLimit = 3
+        tabLayout.setupWithViewPager(vpMain)
+    }
+
+
     override fun lazyLoadData() {
+
 
     }
 

@@ -2,7 +2,6 @@ package com.example.library.utils
 
 import android.app.Activity
 import android.content.res.Resources
-import android.util.DisplayMetrics
 
 /**
  * @author : Alex

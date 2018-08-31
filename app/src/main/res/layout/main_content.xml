@@ -17,12 +17,24 @@
         android:layout_gravity="bottom"
         android:background="@color/grayLight"
         app:elevation="3dp"
+        app:layout_behavior="com.example.administrator.wanandroid.BottomBehavior"
         app:menu="@menu/bottom" />
 
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintTop_toBottomOf="@+id/tool" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="20dp"
+        app:layout_behavior="com.example.administrator.wanandroid.FloatBehavior"
+        app:srcCompat="@drawable/ic_star_border_black_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>

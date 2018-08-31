@@ -8,15 +8,15 @@
         style="@style/ThemeOverlay.AppCompat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:theme="@style/ToolbarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tabBackground="@color/colorPrimary"
-        app:tabGravity="fill"
+        app:tabGravity="center"
         app:tabIndicatorColor="@android:color/white"
         app:tabIndicatorHeight="2dp"
-        app:tabMode="fixed"
-        android:theme="@style/ToolbarTheme"
+        app:tabMode="scrollable"
         app:tabSelectedTextColor="@android:color/white"
         app:tabTextAppearance="@style/TabLayoutText" />
 

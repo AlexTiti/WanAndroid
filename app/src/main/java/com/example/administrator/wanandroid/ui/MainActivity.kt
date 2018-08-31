@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.NavigationView
 import android.support.v7.app.ActionBarDrawerToggle
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -83,6 +84,7 @@ class MainActivity : BaseCompatActivity() {
 
             }
         }
+        layout.closeDrawer(Gravity.START)
         true
     }
 
@@ -163,43 +165,39 @@ class MainActivity : BaseCompatActivity() {
     fun showFragmentIndex(index: Int) {
         val transaction = fragmentManager.beginTransaction()
 
-        projectFragment.let { transaction.hide(it) }
-        knowledgeFragment.let { transaction.hide(it) }
-        navigationFragment.let { transaction.hide(it) }
-        projectFragment.let { transaction.hide(it) }
+
         currentIndex = index
         when (index) {
             0 -> {
                 toolbar.title = "首页"
-                if (pageFragment == null) {
-                    pageFragment = PageFragment.newInstance()
-                    transaction.add(R.id.frameLayout, pageFragment, PageFragment::class.java.simpleName)
-                }
                 transaction.show(pageFragment)
+                        .hide(knowledgeFragment)
+                        .hide(navigationFragment)
+                        .hide(projectFragment)
             }
             1 -> {
                 toolbar.title = "知识"
-                if (knowledgeFragment == null) {
-                    knowledgeFragment = KnowledgeFragment.newInstance()
-                    transaction.add(R.id.frameLayout, knowledgeFragment, KnowledgeFragment::class.java.simpleName)
-                }
+
                 transaction.show(knowledgeFragment)
+                        .hide(pageFragment)
+                        .hide(navigationFragment)
+                        .hide(projectFragment)
             }
             2 -> {
                 toolbar.title = "导航"
-                if (navigationFragment == null) {
-                    navigationFragment = NavigationFragment.newInstance()
-                    transaction.add(R.id.frameLayout, navigationFragment, NavigationFragment::class.java.simpleName)
-                }
                 transaction.show(navigationFragment)
+                        .hide(pageFragment)
+                        .hide(knowledgeFragment)
+                        .hide(projectFragment)
+
             }
             3 -> {
                 toolbar.title = "项目"
-                if (projectFragment == null) {
-                    projectFragment = ProjectFragment.newInstance()
-                    transaction.add(R.id.frameLayout, projectFragment, ProjectFragment::class.java.simpleName)
-                }
                 transaction.show(projectFragment)
+                        .hide(pageFragment)
+                        .hide(knowledgeFragment)
+                        .hide(navigationFragment)
+
             }
             else -> {
 

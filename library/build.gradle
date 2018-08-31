@@ -37,24 +37,42 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // Retrofit
-    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
-    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttploggingVersion"
-    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
+    api "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    api "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+    api "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
+    api "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttploggingVersion"
+    api "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
 
-    //Fragment
-    implementation 'me.yokeyword:fragmentation:1.2.4'
     // butterKnife
-    implementation "com.jakewharton:butterknife:$rootProject.ext.butterknifeVwesion"
+    api "com.jakewharton:butterknife:$rootProject.ext.butterknifeVwesion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVwesion"
+
     // RxBinging
-    compile "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$rootProject.rxbindingVersion"
+    api "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$rootProject.rxbindingVersion"
 
     // Glide
-    implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+    api "com.github.bumptech.glide:glide:$rootProject.glideVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
     implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:$rootProject.ext.BaseRecyclerViewAdapterHelperVersion"
+
+    def paging_version = "1.0.0"
+    api "android.arch.paging:runtime:$paging_version"
+    testApi "android.arch.paging:common:$paging_version"
+    api 'android.arch.paging:rxjava2:1.0.0-rc1'
+
+    def lifecycle_version = "1.1.1"
+    api "android.arch.lifecycle:extensions:$lifecycle_version"
+    // alternatively - just ViewModel
+    api "android.arch.lifecycle:viewmodel:$lifecycle_version"
+    // use -ktx for Kotlin
+    // alternatively - just LiveData
+    api "android.arch.lifecycle:livedata:$lifecycle_version"
+    // alternatively - Lifecycles only (no ViewModel or LiveData).
+    //     Support library depends on this lightweight import
+    api "android.arch.lifecycle:runtime:$lifecycle_version"
+    annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_version"
+    // optional - ReactiveStreams support for LiveData
+    api "android.arch.lifecycle:reactivestreams:$lifecycle_version"
 
 }
 repositories {
