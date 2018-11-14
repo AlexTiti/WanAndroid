@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_navigation"
+    app:startDestination="@id/pageFragment">
+
+    <fragment
+        android:id="@+id/pageFragment"
+        android:name="com.example.administrator.wanandroid.ui.fragment.PageFragment"
+        android:label="PageFragment" />
+    <fragment
+        android:id="@+id/knowledgeFragment"
+        android:name="com.example.administrator.wanandroid.ui.fragment.ProjectFragment"
+        android:label="KnowledgeFragment" />
+    <fragment
+        android:id="@+id/navigationFragment"
+        android:name="com.example.administrator.wanandroid.ui.fragment.NavigationFragment"
+        android:label="NavigationFragment" />
+    <fragment
+        android:id="@+id/projectFragment"
+        android:name="com.example.administrator.wanandroid.ui.fragment.TagWeiXinFragment"
+        android:label="ProjectFragment" />
+
+    <action android:id="@+id/action_global_pageFragment" app:destination="@id/pageFragment"/>
+    <action android:id="@+id/action_global_knowledgeFragment" app:destination="@id/knowledgeFragment"/>
+    <action android:id="@+id/action_global_navigationFragment" app:destination="@id/navigationFragment"/>
+    <action android:id="@+id/action_global_projectFragment" app:destination="@id/projectFragment"/>
+
+</navigation>

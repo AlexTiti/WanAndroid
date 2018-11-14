@@ -26,16 +26,14 @@ class PageFragment : BaseCompatFragment() {
 
     val adapter by lazy {
         ViewPageAdapter(supportFragmentManager!!)
-
-
     }
 
 
     override fun initUI(view: View, savedInstanceState: Bundle?) {
         fragmentList.let {
             it.add(ArticleFragment.newInstance())
-            it.add(ArticleFragment.newInstance())
-            it.add(ArticleFragment.newInstance())
+            it.add(CollectArticleFragment.newInstance())
+            it.add(PlanArticleFragment.newInstance())
         }
         adapter.setFragments(fragmentList)
 

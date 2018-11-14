@@ -9,6 +9,7 @@ import android.arch.paging.PagedList
  * networkStatus：观察网络状态
  * refreshState ： 观察刷新状态
  * refresh ： 执行刷新操作
+ * retry : 重试操作
  * @author  : Alex
  * @date    : 2018/08/21
  * @version : V 2.0.0

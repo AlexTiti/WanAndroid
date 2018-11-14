@@ -26,11 +26,11 @@ open class BasePagingViewModel<T>(resposity: Resposity<T>) : ViewModel() {
     // 监听加载的数据
     val pagedList = Transformations.switchMap(repoResult) {
         it.pagedList
-    }
+    }!!
     // 网络状况
-    val networkStatus = Transformations.switchMap(repoResult) { it.networkStatus }
+    val networkStatus = Transformations.switchMap(repoResult) { it.networkStatus }!!
     // 刷新和加载更多的状态
-    val refreshState = Transformations.switchMap(repoResult) { it.refreshState }
+    val refreshState = Transformations.switchMap(repoResult) { it.refreshState }!!
 
     /**
      * 执行刷新操作

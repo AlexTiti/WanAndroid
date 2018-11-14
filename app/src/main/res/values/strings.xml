@@ -2,4 +2,15 @@
     <string name="app_name">WanAndroid</string>
     <string name="navigation_open">Open navigation drawer</string>
     <string name="navigation_close">Close navigation drawer</string>
+    <string name="collect_article">收藏文章</string>
+    <string name="cancel_collect_article">取消收藏</string>
+    <string name="add_read_plan">加入阅读计划</string>
+    <string name="delete_read_plan">删除阅读计划</string>
+    <string name="login_empty">账号和密码都不能为空！</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确定</string>
+    <string name="notice">提示</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

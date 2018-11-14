@@ -1,14 +1,23 @@
 package com.example.administrator.wanandroid.ui.fragment
 
-import android.net.Uri
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.example.administrator.wanandroid.R
-import com.example.administrator.wanandroid.ui.LoginActivity
+import com.example.administrator.wanandroid.model.LoginModel
+import com.example.administrator.wanandroid.respository.LoginResposity
+import com.example.administrator.wanandroid.ui.MainActivity
+import com.example.library.utils.PreferencesUtil
+import com.example.library.utils.ToastUtils
+import kotlinx.android.synthetic.main.fragment_register.*
 
 /**
  * A fragment with a Google +1 button.
@@ -19,67 +28,55 @@ import com.example.administrator.wanandroid.ui.LoginActivity
  * create an instance of this fragment.
  */
 class RegisterFragment : Fragment() {
-
-    private var mListener: OnFragmentInteractionListener? = null
-
-
+    private lateinit var model: LoginModel
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_register, container, false)
-        val textView2 = view.findViewById<TextView>(R.id.textView2)
-        textView2.setOnClickListener {
-            (activity as LoginActivity).showHideFragment(0)
+        model = ViewModelProviders.of(activity!!, object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return LoginModel(LoginResposity()) as T
+            }
+
+        })[LoginModel::class.java]
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        btn_register.setOnClickListener {
+
+            val account = tie_phone_register.text?.trim().toString()
+            val password = tie_pswd_register.text?.trim().toString()
+            val password_re = tie_pswd_register_re.text?.trim().toString()
+
+            if (TextUtils.isEmpty(account) || TextUtils.isEmpty(password) || TextUtils.isEmpty(password_re)) {
+                ToastUtils.showToast(getString(R.string.login_empty))
+            } else {
+                model.register(account, password, password_re)
+            }
         }
 
-        return view;
+
+        model.register.observe(this, Observer {
+            if (it?.errorCode == 0) {
+                startActivity(Intent(activity, MainActivity::class.java))
+                var userId: Int by PreferencesUtil("userId", 0)
+                var userLogin: Boolean by PreferencesUtil<Boolean>("login", false)
+                var userName: String by PreferencesUtil<String>("userName", "Android")
+//                var userLogin : Boolean by PreferencesUtil<Boolean>("login",false)
+                userId = it.data?.id!!
+                userName = it.data?.username!!
+                userLogin = true
+                activity?.finish()
+            } else {
+                ToastUtils.showToast(it?.errorMsg!!)
+            }
+        })
     }
 
-
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        if (mListener != null) {
-            mListener!!.onFragmentInteraction(uri)
-        }
-    }
-
-//    override fun onAttach(context: Context?) {
-//        super.onAttach(context)
-//        if (context is OnFragmentInteractionListener) {
-//            mListener = context
-//        } else {
-//            throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
-//        }
-//    }
-
-    override fun onDetach() {
-        super.onDetach()
-        mListener = null
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
-    }
 
     companion object {
-
-
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment RegisterFragment.
-         */
-
         fun newInstance(): RegisterFragment {
             val fragment = RegisterFragment()
             return fragment

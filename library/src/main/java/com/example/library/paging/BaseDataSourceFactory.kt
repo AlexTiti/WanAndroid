@@ -14,10 +14,10 @@ import android.arch.paging.DataSource
 abstract class BaseDataSourceFactory<T, M> : DataSource.Factory<T, M>() {
 
     //创建观察的LivaData<DataSource> ,操作的改变都是修改sourceLivaData的值，触发系列操作
-    val sourceLivaData = MutableLiveData<BaseDataSource<T, M>>()
+    val sourceLivaData = MutableLiveData<BaseItemDataSource<T, M>>()
 
-    override fun create(): BaseDataSource<T, M> {
-        val dataSource: BaseDataSource<T, M> = createDataSource()
+    override fun create(): BaseItemDataSource<T, M> {
+        val dataSource: BaseItemDataSource<T, M> = createDataSource()
         sourceLivaData.postValue(dataSource)
         return dataSource
     }
@@ -25,6 +25,6 @@ abstract class BaseDataSourceFactory<T, M> : DataSource.Factory<T, M>() {
     /**
      * 创建 实现的DataSources实例
      */
-    abstract fun createDataSource(): BaseDataSource<T, M>
+    abstract fun createDataSource(): BaseItemDataSource<T, M>
 
 }

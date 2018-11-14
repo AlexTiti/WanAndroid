@@ -1,95 +1,82 @@
 package com.example.administrator.wanandroid.ui.fragment
 
-import android.content.Context
-import android.net.Uri
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-
+import androidx.navigation.Navigation
 import com.example.administrator.wanandroid.R
-import com.example.administrator.wanandroid.ui.LoginActivity
+import com.example.administrator.wanandroid.model.LoginModel
+import com.example.administrator.wanandroid.respository.LoginResposity
+import com.example.administrator.wanandroid.ui.MainActivity
+import com.example.library.utils.PreferencesUtil
+import com.example.library.utils.ToastUtils
 import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_register.*
 
-/**
- * A fragment with a Google +1 button.
- * Activities that contain this fragment must implement the
- * [LoginFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [LoginFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+@Suppress("UNCHECKED_CAST")
+
 class LoginFragment : Fragment() {
 
-
-    private var mListener: OnFragmentInteractionListener? = null
-
+    private lateinit var model: LoginModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
+
         val view = inflater.inflate(R.layout.fragment_login, container, false)
-        val textView2 = view.findViewById<TextView>(R.id.textView2)
-        textView2.setOnClickListener {
-            (activity as LoginActivity).showHideFragment(1)
-        }
+        model = ViewModelProviders.of(activity!!, object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return LoginModel(LoginResposity()) as T
+            }
 
-
+        })[LoginModel::class.java]
 
         return view
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    }
+        btn_login.setOnClickListener {
 
-    fun onButtonPressed(uri: Uri) {
-        if (mListener != null) {
-            mListener!!.onFragmentInteraction(uri)
+            val account = tie_phone_login.text?.trim().toString()
+            val password = tie_pswd_login.text?.trim().toString()
+
+            if (TextUtils.isEmpty(account) || TextUtils.isEmpty(password)) {
+                ToastUtils.showToast(getString(R.string.login_empty))
+            } else {
+                model.login(account, password)
+            }
         }
-    }
 
-//    override fun onAttach(context: Context?) {
-//        super.onAttach(context)
-//        if (context is OnFragmentInteractionListener) {
-//            mListener = context
-//        } else {
-//            throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
-//        }
-//    }
-
-    override fun onDetach() {
-        super.onDetach()
-        mListener = null
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
-     */
-    interface OnFragmentInteractionListener {
-        fun onFragmentInteraction(uri: Uri)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment LoginFragment.
-         */
-
-        fun newInstance(): LoginFragment {
-            return LoginFragment()
+        tv_register.setOnClickListener {
+            Navigation.findNavController(tv_register).navigate(R.id.action_loginFragment_to_registerFragment)
         }
+
+        model.loginState.observe(this, Observer {
+            if (it?.errorCode == 0) {
+                startActivity(Intent(activity, MainActivity::class.java))
+                var userId: Int by PreferencesUtil("userId", 0)
+                var userLogin: Boolean by PreferencesUtil<Boolean>("login", false)
+                var userName: String by PreferencesUtil<String>("userName", "Android")
+//                var userLogin : Boolean by PreferencesUtil<Boolean>("login",false)
+                userId = it.data?.id!!
+                userName = it.data?.username!!
+                userLogin = true
+                activity?.finish()
+            } else {
+                ToastUtils.showToast(it?.errorMsg!!)
+            }
+
+        })
     }
+
 
 }

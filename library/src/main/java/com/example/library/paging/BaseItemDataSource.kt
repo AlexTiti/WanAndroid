@@ -7,12 +7,12 @@ import java.util.concurrent.Executor
 
 
 /**
- * The {@link BaseDataSource} 设置配置DataSource必须的参数和方法
+ * The {@link BaseItemDataSource} 设置配置DataSource必须的参数和方法
  * @author  : Alex
  * @date    : 2018/08/21
  * @version : V 2.0.0
  */
-abstract class BaseDataSource<T, M>(private var retryExecutor: Executor) : ItemKeyedDataSource<T, M>() {
+abstract class BaseItemDataSource<T, M>(private var retryExecutor: Executor) : ItemKeyedDataSource<T, M>() {
     /**
      * 控制重新加载
      */
@@ -47,16 +47,15 @@ abstract class BaseDataSource<T, M>(private var retryExecutor: Executor) : ItemK
      * 初始化时的加载
      */
     override fun loadInitial(params: LoadInitialParams<T>, callback: LoadInitialCallback<M>) {
-        refreshStatus.postValue(Resource.loading(null))
+        refreshStatus.postValue(Resource.loading())
         setLoadInitial(params, callback)
-
     }
 
     /**
      * 加载更多
      */
     override fun loadAfter(params: LoadParams<T>, callback: LoadCallback<M>) {
-        networkStatus.postValue(Resource.loading(null))
+        networkStatus.postValue(Resource.loading())
         setLoadAfterResult(params, callback)
     }
 

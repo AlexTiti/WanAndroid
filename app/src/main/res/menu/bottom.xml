@@ -7,14 +7,14 @@
         android:title="首页" />
     <item
         android:id="@+id/knowledge"
-        android:icon="@drawable/ic_blur_on_black_24dp"
-        android:title="知识" />
+        android:icon="@drawable/ic_view_headline_black_24dp"
+        android:title="项目" />
     <item
         android:id="@+id/navigation"
         android:icon="@drawable/ic_navigation_black_24dp"
         android:title="导航" />
     <item
         android:id="@+id/project"
-        android:icon="@drawable/ic_view_headline_black_24dp"
-        android:title="项目" />
+        android:icon="@drawable/ic_blur_on_black_24dp"
+        android:title="公众号" />
 </menu>

@@ -2,6 +2,7 @@ package com.example.library.base.fragment
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v4.app.Fragment
@@ -10,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import butterknife.ButterKnife
 import butterknife.Unbinder
+import com.example.library.R
 import com.example.library.global.GlobalApplication
 import com.example.library.utils.AppUtils
 import io.reactivex.disposables.CompositeDisposable
@@ -142,9 +144,35 @@ abstract class BaseCompatFragment : Fragment() {
      * 在监听器之前把数据准备好
      */
     open fun prepare() {
-        mContext = AppUtils.context
         mApplication = mActivity.application as GlobalApplication
     }
 
     abstract fun lazyLoadData()
+
+    /**
+     * [页面跳转]
+     *
+     * @param clz    要跳转的Activity
+     * @param intent intent
+     */
+    fun startActivity(clz: Class<*>, intent: Intent) {
+        intent.setClass(mActivity, clz)
+        startActivity(intent)
+    }
+
+    /**
+     * [携带数据的页面跳转]
+     *
+     * @param clz    要跳转的Activity
+     * @param bundle bundel数据
+     */
+    fun startActivity(clz: Class<*>, bundle: Bundle?) {
+        val intent = Intent()
+        intent.setClass(mContext, clz)
+        if (bundle != null) {
+            intent.putExtras(bundle)
+        }
+        startActivity(intent)
+
+    }
 }

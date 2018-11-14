@@ -35,6 +35,6 @@
         android:layout_marginBottom="60dp"
         android:layout_marginEnd="20dp"
         app:layout_behavior="com.example.administrator.wanandroid.FloatBehavior"
-        app:srcCompat="@drawable/ic_star_border_black_24dp" />
+        app:srcCompat="@drawable/ic_star_border_green_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>

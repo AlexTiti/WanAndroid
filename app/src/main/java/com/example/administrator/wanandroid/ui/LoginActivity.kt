@@ -1,11 +1,9 @@
 package com.example.administrator.wanandroid.ui
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
+import androidx.navigation.Navigation
 import com.example.administrator.wanandroid.R
-import com.example.administrator.wanandroid.ui.fragment.LoginFragment
-import com.example.administrator.wanandroid.ui.fragment.RegisterFragment
 import com.example.library.base.BaseCompatActivity
 
 class LoginActivity : BaseCompatActivity() {
@@ -16,67 +14,68 @@ class LoginActivity : BaseCompatActivity() {
 
     override fun initView(savedInstanceState: Bundle?) {
 
-        if (savedInstanceState != null) savedInstanceState.let {
-            loginFragment = fragmentManager.getFragment(it, LoginFragment::class.java.simpleName) as LoginFragment
-            registerFragment = fragmentManager.getFragment(it, registerFragment!!::class.java.simpleName) as RegisterFragment
-        } else {
-            loginFragment = LoginFragment.newInstance()
-            registerFragment = RegisterFragment.newInstance()
-        }
 
-        if (!loginFragment!!.isAdded) {
-            with(fragmentManager) {
-                beginTransaction()
-                        .add(R.id.container, loginFragment!!, LoginFragment::class.java.simpleName)
-                        .commit()
-            }
-        }
-        if (!registerFragment!!.isAdded) {
-            with(fragmentManager) {
-                beginTransaction()
-                        .add(R.id.container, registerFragment!!, RegisterFragment::class.java.simpleName)
-                        .commit()
-            }
-        }
-        showHideFragment(0)
+//        if (savedInstanceState != null) savedInstanceState.let {
+//            loginFragment = fragmentManager.getFragment(it, LoginFragment::class.java.simpleName) as LoginFragment
+//            registerFragment = fragmentManager.getFragment(it, registerFragment!!::class.java.simpleName) as RegisterFragment
+//        } else {
+//            loginFragment = LoginFragment.newInstance()
+//            registerFragment = RegisterFragment.newInstance()
+//        }
+//
+//        if (!loginFragment!!.isAdded) {
+//            with(fragmentManager) {
+//                beginTransaction()
+//                        .add(R.id.container, loginFragment!!, LoginFragment::class.java.simpleName)
+//                        .commit()
+//            }
+//        }
+//        if (!registerFragment!!.isAdded) {
+//            with(fragmentManager) {
+//                beginTransaction()
+//                        .add(R.id.container, registerFragment!!, RegisterFragment::class.java.simpleName)
+//                        .commit()
+//            }
+//        }
+//        showHideFragment(0)
     }
 
-    override fun getLayoutId() = R.layout.fragment_cantiner
+    override fun getLayoutId() = R.layout.activity_login
+
+//    var loginFragment: LoginFragment? = null
+//    var registerFragment: RegisterFragment? = null
+//
+//    val fragmentManager by lazy {
+//        supportFragmentManager
+//    }
 
 
-    var loginFragment: LoginFragment? = null
-    var registerFragment: RegisterFragment? = null
+//    fun showHideFragment(position: Int) {
+//        with(fragmentManager) {
+//            when (position) {
+//                0 -> {
+//                    beginTransaction().show(loginFragment!!).hide(registerFragment!!).commit()
+//                }
+//                else -> {
+//                    beginTransaction().show(registerFragment!!).hide(loginFragment!!).commit()
+//                }
+//            }
+//        }
+//    }
+//
+//
+//    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
+//        super.onSaveInstanceState(outState, outPersistentState)
+//
+//        if (loginFragment!!.isAdded) {
+//            fragmentManager.putFragment(outState!!, LoginFragment::class.java.simpleName, loginFragment!!)
+//        }
+//        if (registerFragment!!.isAdded) {
+//            fragmentManager.putFragment(outState!!, LoginFragment::class.java.simpleName, registerFragment!!)
+//        }
+//
+//    }
 
-    val fragmentManager by lazy {
-        supportFragmentManager
-    }
-
-
-    fun showHideFragment(position: Int) {
-        with(fragmentManager) {
-            when (position) {
-                0 -> {
-                    beginTransaction().show(loginFragment!!).hide(registerFragment!!).commit()
-                }
-                else -> {
-                    beginTransaction().show(registerFragment!!).hide(loginFragment!!).commit()
-                }
-            }
-        }
-    }
-
-
-    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
-        super.onSaveInstanceState(outState, outPersistentState)
-
-        if (loginFragment!!.isAdded) {
-            fragmentManager.putFragment(outState!!, LoginFragment::class.java.simpleName, loginFragment!!)
-        }
-        if (registerFragment!!.isAdded) {
-            fragmentManager.putFragment(outState!!, LoginFragment::class.java.simpleName, registerFragment!!)
-        }
-
-    }
-
+    override fun onSupportNavigateUp() = Navigation.findNavController(this, R.id.fragment_navigation_login).navigateUp()
 
 }

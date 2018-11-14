@@ -12,6 +12,7 @@ import java.util.concurrent.Executor
  * @version : V 2.0.0
  */
 class ArticleResposity(private val api: Api, private val retryExecutor: Executor) : BaseResposity<Int, ArticleBean>() {
+
     override fun createDataBaseFactory(): BaseDataSourceFactory<Int, ArticleBean> {
         return ArticleDataSourceFactory(api, retryExecutor)
     }

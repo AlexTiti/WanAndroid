@@ -14,7 +14,7 @@ class PreferencesUtil<T>(val key: String, val default: T) : ReadWriteProperty<An
     companion object {
         lateinit var preferences: SharedPreferences
         private var mPreferencesName = "share_preference_default"
-        fun get(context: Context) {
+       public fun get(context: Context) {
             preferences = context.getSharedPreferences(context.packageName + mPreferencesName, Context.MODE_PRIVATE)
         }
     }

@@ -1,6 +1,7 @@
 package com.example.administrator.wanandroid.http.paging
 
-import com.example.administrator.paging.paging.BaseDataSource
+import android.annotation.SuppressLint
+import com.example.administrator.paging.paging.BaseItemDataSource
 import com.example.administrator.wanandroid.bean.ArticleBean
 import com.example.administrator.wanandroid.http.Api
 import com.example.library.helper.RxHelper
@@ -11,12 +12,12 @@ import java.util.concurrent.Executor
  * @date    : 2018/08/31
  * @version : V 2.0.0
  */
-class ArticleDataSource(private val api: Api, retryExecutor: Executor) : BaseDataSource<Int, ArticleBean>(retryExecutor) {
+class ArticleDataSource(private val api: Api, retryExecutor: Executor) : BaseItemDataSource<Int, ArticleBean>(retryExecutor) {
     var page = 0
-
 
     override fun setKey(item: ArticleBean) = item.id
 
+    @SuppressLint("CheckResult")
     override fun setLoadAfterResult(params: LoadParams<Int>, callback: LoadCallback<ArticleBean>) {
         api.getArticleList(page)
                 .compose(RxHelper.rxSchedulerHelper())
@@ -29,6 +30,7 @@ class ArticleDataSource(private val api: Api, retryExecutor: Executor) : BaseDat
                 })
     }
 
+    @SuppressLint("CheckResult")
     override fun setLoadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<ArticleBean>) {
         api.getArticleList(page)
                 .compose(RxHelper.rxSchedulerHelper())

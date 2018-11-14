@@ -1,5 +1,6 @@
 package com.example.library.utils
 
+import android.annotation.SuppressLint
 import android.text.TextUtils
 import android.text.format.DateFormat
 import java.text.ParseException
@@ -192,6 +193,7 @@ object DateUtils {
         return tarYear == comYear
     }
 
+    @SuppressLint("SimpleDateFormat")
     @JvmOverloads
     private fun str2date(str: String?, format: String = PATTERN): Date? {
         var date: Date? = null

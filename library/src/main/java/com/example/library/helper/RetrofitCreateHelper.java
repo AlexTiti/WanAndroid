@@ -3,6 +3,8 @@ package com.example.library.helper;
 import com.example.library.helper.okhttp.TrustManager;
 import com.example.library.helper.okhttp.cache.CacheInterceptor;
 import com.example.library.helper.okhttp.cache.HttpCache;
+import com.example.library.helper.okhttp.cookies.CookieManger;
+import com.example.library.utils.AppUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -30,11 +32,11 @@ public class RetrofitCreateHelper {
             //打印日志
             .addInterceptor(interceptor)
             //设置Cache拦截器
-            .addNetworkInterceptor(cacheInterceptor)
-            .addInterceptor(cacheInterceptor)
+//            .addNetworkInterceptor(cacheInterceptor)
+//            .addInterceptor(cacheInterceptor)
             .cache(HttpCache.getCache())
             // 设置 Cookie
-//            .cookieJar(new CookieManger(AppUtils.INSTANCE.getContext()))
+            .cookieJar(new CookieManger(AppUtils.INSTANCE.getContext()))
             //time out
             .connectTimeout(TIMEOUT_CONNECTION, TimeUnit.SECONDS)
             .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)

@@ -6,7 +6,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
 import android.net.ConnectivityManager;
 import android.os.Build;
@@ -27,7 +26,6 @@ import com.example.library.global.AppManager;
 import com.example.library.global.GlobalApplication;
 import com.example.library.utils.AppUtils;
 import com.example.library.utils.NetworkConnectionUtils;
-import com.example.library.utils.StatusBarUtils;
 
 import java.lang.ref.WeakReference;
 
@@ -79,7 +77,6 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
     protected void showLoading() {
 
     }
-
 
 
     @Override
@@ -221,7 +218,6 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
      * @return layout Id
      */
     protected abstract int getLayoutId();
-
 
 
     /**
@@ -388,5 +384,11 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
             baseCompatActivity.hasNetWork(isConnected);
 
         }
+    }
+
+    public void initToolbar(Toolbar toolbar,String title) {
+        toolbar.setTitle(title);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }

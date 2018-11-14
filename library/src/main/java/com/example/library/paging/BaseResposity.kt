@@ -20,6 +20,7 @@ abstract class BaseResposity<T, M> : Resposity<M> {
      *  @param pageSize : 每次加载的数量
      */
     override fun getDataList(pageSize: Int): Listing<M> {
+
         val pageConfig = PagedList.Config.Builder()
                 .setPageSize(pageSize)
                 .setPrefetchDistance(pageSize)

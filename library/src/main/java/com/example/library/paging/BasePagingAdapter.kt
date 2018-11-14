@@ -24,7 +24,7 @@ abstract class BasePagingAdapter<T>(diffCallback: DiffUtil.ItemCallback<T>) : Pa
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        bind(holder, getItem(position)!!)
+        bind(holder, getItem(position)!!, position)
     }
 
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
@@ -46,10 +46,11 @@ abstract class BasePagingAdapter<T>(diffCallback: DiffUtil.ItemCallback<T>) : Pa
             }
         }
 
+
     }
 
 
-    abstract fun bind(holder: ViewHolder, t: T)
+    abstract fun bind(holder: ViewHolder, t: T, position: Int)
 
     abstract fun getItemLayout(): Int
 }
