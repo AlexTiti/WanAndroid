@@ -14,22 +14,15 @@ import android.content.Context
 @Database(entities = [CollectArticle::class,ReadPlanArticle::class,StudyProject::class,RecentSearch::class],version = 1 ,exportSchema = false)
 abstract class AndroidDataBase : RoomDatabase() {
 
-    abstract fun getCollectDao() : CollectedDao
-
-    abstract fun getReadPlanDao() : ReadPlanDao
-
-    abstract fun getStudyProjectDao() : StudyProjectDao
-
-    abstract fun getRecentSearchDao() : RecentSearchDao
-
+    abstract fun getCollectDao() : CollectedDao  // 用于收藏文章操作
+    abstract fun getReadPlanDao() : ReadPlanDao  // 用于阅读计划操作
+    abstract fun getStudyProjectDao() : StudyProjectDao // 用于项目学习操作
+    abstract fun getRecentSearchDao() : RecentSearchDao // 用于最近搜索操作
 
    companion object {
-
        @Volatile
       private var instence : AndroidDataBase? = null
-
            fun getInstence(context: Context) : AndroidDataBase{
-
                if (instence == null){
                    synchronized(AndroidDataBase::class){
                        if (instence == null){

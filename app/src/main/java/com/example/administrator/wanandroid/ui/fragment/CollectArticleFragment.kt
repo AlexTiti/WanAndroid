@@ -16,7 +16,7 @@ import com.example.administrator.wanandroid.adapter.CollectArticleDiffUtil
 import com.example.administrator.wanandroid.listener.OnItemClickListener
 import com.example.administrator.wanandroid.bean.CollectArticleBean
 import com.example.administrator.wanandroid.http.RetrofitApi
-import com.example.administrator.wanandroid.http.paging.CollectArticleResposity
+import com.example.administrator.wanandroid.http.paging.CollectArticleRepository
 import com.example.administrator.wanandroid.model.CollectArticleViewModel
 import com.example.administrator.wanandroid.ui.ArticleDetailActivity
 import com.example.administrator.wanandroid.utils.FIXED_EXECUTOR
@@ -78,7 +78,7 @@ class CollectArticleFragment : BaseCompatFragment(), OnItemClickListener<Collect
         return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
                 val api = RetrofitApi.instence
-                val articleResposity = CollectArticleResposity(api, FIXED_EXECUTOR)
+                val articleResposity = CollectArticleRepository(api, FIXED_EXECUTOR)
                 return CollectArticleViewModel(articleResposity) as T
             }
         })[CollectArticleViewModel::class.java]
