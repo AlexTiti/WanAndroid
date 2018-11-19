@@ -12,8 +12,6 @@
 
     <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="ToolbarPup" parent="ThemeOverlay.AppCompat.Light" />
-
     <style name="TabLayoutText" parent="Base.TextAppearance.AppCompat.Button">
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
