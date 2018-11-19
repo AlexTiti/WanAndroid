@@ -18,7 +18,7 @@ import com.example.administrator.wanandroid.database.ReadPlanArticle
 import com.example.administrator.wanandroid.database.StudyProject
 import com.example.administrator.wanandroid.http.RetrofitApi
 import com.example.administrator.wanandroid.model.ArticleDetailModel
-import com.example.administrator.wanandroid.respository.ArticleDetailResposity
+import com.example.administrator.wanandroid.respository.ArticleDetailRepository
 import com.example.library.base.BaseCompatActivity
 import com.just.agentweb.AgentWeb
 import kotlinx.android.synthetic.main.fragment_container.*
@@ -38,7 +38,7 @@ class ArticleDetailActivity : BaseCompatActivity(), View.OnClickListener {
         ViewModelProviders.of(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
 
-                return ArticleDetailModel(ArticleDetailResposity(RetrofitApi.instence,this@ArticleDetailActivity)) as T
+                return ArticleDetailModel(ArticleDetailRepository(RetrofitApi.instence,this@ArticleDetailActivity)) as T
             }
 
         })[ArticleDetailModel::class.java]
@@ -81,7 +81,6 @@ class ArticleDetailActivity : BaseCompatActivity(), View.OnClickListener {
         model.contentTitle.observe(this, Observer {
             supportActionBar?.title = it
         })
-
         model.contentTitle.value = mTitle
     }
 
@@ -91,8 +90,6 @@ class ArticleDetailActivity : BaseCompatActivity(), View.OnClickListener {
             createWebView(it)
         })
         model.contentUrl.value = mUrl
-
-
     }
 
     private fun createWebView(url: String?) {

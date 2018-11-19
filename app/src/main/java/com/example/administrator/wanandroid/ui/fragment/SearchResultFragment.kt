@@ -7,17 +7,14 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.example.administrator.wanandroid.Constants
 import com.example.administrator.wanandroid.R
 import com.example.administrator.wanandroid.adapter.ArticleAdapter
 import com.example.administrator.wanandroid.adapter.ArticleDiffUtil
 import com.example.administrator.wanandroid.bean.ArticleBean
 import com.example.administrator.wanandroid.http.RetrofitApi
-import com.example.administrator.wanandroid.http.paging.QueryArticleResposity
+import com.example.administrator.wanandroid.http.paging.QueryArticleRepository
 import com.example.administrator.wanandroid.listener.OnItemClickListener
 import com.example.administrator.wanandroid.ui.ArticleDetailActivity
 import com.example.administrator.wanandroid.utils.FIXED_EXECUTOR
@@ -77,7 +74,7 @@ class SearchResultFragment(val string: String?) : BaseCompatFragment() , OnItemC
         viewModel = ViewModelProviders.of(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
                 val api = RetrofitApi.instence
-                val articleResposity = QueryArticleResposity(string!!, api, FIXED_EXECUTOR)
+                val articleResposity = QueryArticleRepository(string!!, api, FIXED_EXECUTOR)
                 return SearchResultViewModel(articleResposity) as T
             }
         })[SearchResultViewModel::class.java]

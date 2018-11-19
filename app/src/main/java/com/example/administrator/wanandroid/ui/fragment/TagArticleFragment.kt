@@ -16,7 +16,7 @@ import com.example.administrator.wanandroid.adapter.ArticleAdapter
 import com.example.administrator.wanandroid.adapter.ArticleDiffUtil
 import com.example.administrator.wanandroid.bean.ArticleBean
 import com.example.administrator.wanandroid.http.RetrofitApi
-import com.example.administrator.wanandroid.http.paging.TagArticleResposity
+import com.example.administrator.wanandroid.http.paging.TagArticleRepository
 import com.example.administrator.wanandroid.listener.OnItemClickListener
 import com.example.administrator.wanandroid.model.TagArticleViewModel
 import com.example.administrator.wanandroid.ui.ArticleDetailActivity
@@ -78,7 +78,7 @@ class TagArticleFragment(var articleId:Int = -1)  : BaseCompatFragment(), OnItem
         return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
                 val api = RetrofitApi.instence
-                val articleResposity = TagArticleResposity(api, FIXED_EXECUTOR, articleId)
+                val articleResposity = TagArticleRepository(api, FIXED_EXECUTOR, articleId)
                 return TagArticleViewModel(articleResposity) as T
             }
         })[TagArticleViewModel::class.java]

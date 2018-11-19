@@ -6,8 +6,7 @@ import android.arch.lifecycle.ViewModel
 import android.content.Context
 import com.example.administrator.wanandroid.database.ReadPlanArticle
 import com.example.administrator.wanandroid.database.StudyProject
-import com.example.administrator.wanandroid.respository.ArticleDetailResposity
-import com.example.library.utils.AppUtils.context
+import com.example.administrator.wanandroid.respository.ArticleDetailRepository
 
 /**
  * @author  : Alex
@@ -18,11 +17,11 @@ import com.example.library.utils.AppUtils.context
 public const val ADD_CODE = 0
 public const val DELETE_CODE = 1
 
-class ArticleDetailModel(val aricleDetailResposity: ArticleDetailResposity) : ViewModel() {
+class ArticleDetailModel(val aricleDetailResposity: ArticleDetailRepository) : ViewModel() {
 
     val contentTitle = MutableLiveData<String>()
     val contentUrl = MutableLiveData<String>()
-    val contentId = MutableLiveData<Int>()
+
 
 
     /**
@@ -73,10 +72,6 @@ class ArticleDetailModel(val aricleDetailResposity: ArticleDetailResposity) : Vi
         }
 
     }
-
-
-
-
 
     fun initCollectArticle(collected: Boolean) {
         aricleDetailResposity.articleIsCollected.value = collected

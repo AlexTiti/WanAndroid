@@ -15,14 +15,12 @@ import com.example.administrator.wanandroid.adapter.ArticleAdapter
 import com.example.administrator.wanandroid.adapter.ArticleDiffUtil
 import com.example.administrator.wanandroid.bean.ArticleBean
 import com.example.administrator.wanandroid.http.RetrofitApi
-import com.example.administrator.wanandroid.http.paging.ArticleDataSource
-import com.example.administrator.wanandroid.http.paging.ArticleResposity
+import com.example.administrator.wanandroid.http.paging.ArticleRepository
 import com.example.administrator.wanandroid.listener.OnItemClickListener
 import com.example.administrator.wanandroid.model.ArticleViewModel
 import com.example.administrator.wanandroid.ui.ArticleDetailActivity
 import com.example.administrator.wanandroid.utils.FIXED_EXECUTOR
 import com.example.library.base.fragment.BaseCompatFragment
-import com.example.library.paging.BaseResposityImpl
 import kotlinx.android.synthetic.main.article_fragment.*
 
 
@@ -82,7 +80,7 @@ class ArticleFragment : BaseCompatFragment(), OnItemClickListener<ArticleBean>{
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
 
                 val api = RetrofitApi.instence
-                val resposity  = ArticleResposity(api,FIXED_EXECUTOR)
+                val resposity  = ArticleRepository(api,FIXED_EXECUTOR)
                 return ArticleViewModel(resposity) as T
             }
         })[ArticleViewModel::class.java]

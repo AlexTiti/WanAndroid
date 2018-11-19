@@ -17,7 +17,7 @@ import io.reactivex.functions.Consumer
  * @date    : 2018/10/18
  * @version : V 2.0.0
  */
-class ArticleDetailResposity(val api: Api, val context: Context) {
+class ArticleDetailRepository(val api: Api, val context: Context) {
 
 
     val articleIsCollected = MutableLiveData<Boolean>()

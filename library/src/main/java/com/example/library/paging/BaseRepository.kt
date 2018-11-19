@@ -1,22 +1,19 @@
-package com.example.library.paging
+package com.example.administrator.paging.paging
 
 import android.arch.lifecycle.Transformations
 import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PagedList
-import com.example.administrator.paging.paging.BaseDataSourceFactory
-import com.example.administrator.paging.paging.BaseItemDataSource
 import com.example.administrator.paging.paging.base.Listing
-import com.example.administrator.paging.paging.base.Resposity
-import java.lang.Exception
+import com.example.administrator.paging.paging.base.Repository
 
 /**
+ * BaseRepository 配置并实例化LivePagedListBuilder（）对象，根据设定的监听状态和数据，封装List<M>对象
+ * T :
  * @author  : Alex
- * @date    : 2018/10/29
- * @version : V 2.0.2
+ * @date    : 2018/08/21
+ * @version : V 2.0.0
  */
-data class BaseResposityImpl <T, M>(var itemDataSource: BaseItemDataSource<T,M>) : Resposity<M> {
-
-
+abstract class BaseRepository<T, M> : Repository<M> {
 
     /**
      * 配置PagedList.Config实例化List<M>对象，初始化加载的数量默认为{@link #pageSize} 的两倍
@@ -52,38 +49,5 @@ data class BaseResposityImpl <T, M>(var itemDataSource: BaseItemDataSource<T,M>)
     /**
      * 创建DataSourceFactory
      */
-     fun createDataBaseFactory(): BaseDataSourceFactory<T, M>{
-        if (itemDataSource == null){
-         throw Exception("必须添加BaseItemDataSource的实例")
-        }
-       val itemDataFactory = object :BaseDataSourceFactory<T,M>(){
-
-            override fun createDataSource(): BaseItemDataSource<T, M> {
-                return itemDataSource!!
-            }
-        }
-        return itemDataFactory!!
-
-    }
-
-    companion object class Builder<T,M>(){
-
-        var itemDataSource: BaseItemDataSource<T,M>? = null
-
-        fun buildDataSource(itemDataSource: BaseItemDataSource<T,M>):Builder<T,M>{
-            this.itemDataSource = itemDataSource
-            return this
-        }
-
-
-        fun build():BaseResposityImpl<T,M>{
-            if (itemDataSource == null){
-                throw Exception("必须添加BaseItemDataSource的实例")
-            }
-          return BaseResposityImpl<T,M>(itemDataSource!!)
-        }
-
-    }
-
-
+    abstract fun createDataBaseFactory(): BaseDataSourceFactory<T, M>
 }

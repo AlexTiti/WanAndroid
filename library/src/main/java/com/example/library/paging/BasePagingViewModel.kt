@@ -3,7 +3,7 @@ package com.example.administrator.paging.paging
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
-import com.example.administrator.paging.paging.base.Resposity
+import com.example.administrator.paging.paging.base.Repository
 
 
 /**
@@ -12,7 +12,7 @@ import com.example.administrator.paging.paging.base.Resposity
  * @date    : 2018/08/21
  * @version : V 2.0.0
  */
-open class BasePagingViewModel<T>(resposity: Resposity<T>) : ViewModel() {
+open class BasePagingViewModel<T>(resposity: Repository<T>) : ViewModel() {
 
     //开始时建立DataSource和LiveData<Ling<StudentBean>>的连接
     val data = MutableLiveData<Int>()
