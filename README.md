@@ -22,9 +22,9 @@
 
 # Jetpack学习资料
 
-![带你领略Android Jetpack组件的魅力](https://blog.csdn.net/Alexwll/article/details/83302173)
+[带你领略Android Jetpack组件的魅力](https://blog.csdn.net/Alexwll/article/details/83302173)
 
-![Android Jetpack 架构组件之 Lifecycle（使用篇）](https://blog.csdn.net/Alexwll/article/details/80638905)
+[Android Jetpack 架构组件之 Lifecycle（使用篇）](https://blog.csdn.net/Alexwll/article/details/80638905)
 
 ![Android Jetpack 架构组件之 Lifecycle（源码篇）](https://blog.csdn.net/Alexwll/article/details/82491901)
 
